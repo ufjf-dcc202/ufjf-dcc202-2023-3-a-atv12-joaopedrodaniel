@@ -1,11 +1,9 @@
 let estoque = {
     'joao': [
-        {'tipo': 'maca', 'qtd': 1},
-        {'tipo': 'pera', 'qtd': 2}
+        {'tipo': 'maca', 'quantidade': 1}
     ],
     'maria': [
-        {'tipo': 'maca', 'qtd': 2},
-        {'tipo': 'banana', 'qtd': 4}
+        {'tipo': 'maca', 'quantidade': 2}
     ]
 };
 
@@ -14,55 +12,67 @@ function getEstoque(){
 }
 
 function transacaoNoEstoque(origem, destino, tipo, quantidade) {
-    if(origem === destino) {
+    if (origem === destino || quantidade <= 0) {
         return;
     }
-    if(destino === "pomar") {
-        dePessoaParaPomar(origem, tipo, quantidade);
+  
+    if (origem !== "pomar" && !estoque[origem]) {
+        estoque[origem] = [];
+    }  
+  
+    if (destino !== "pomar" && !estoque[destino]) {
+        estoque[destino] = [];
+    }  
+    
+    if (destino === "pomar") {
+        const itemEncontrado = estoque[origem].find(item => item.tipo === tipo);
+    
+        if (itemEncontrado) {
+            itemEncontrado.quantidade = Math.max(0, itemEncontrado.quantidade - quantidade);
+        }
+    
         return;
+    }  
+
+    if (origem === "pomar") {
+        const itemEncontrado = estoque[destino].find(item => item.tipo === tipo);
+    
+        if (itemEncontrado) {
+            itemEncontrado.quantidade += quantidade;
+        } else {
+            estoque[destino].push({tipo, quantidade});
+        }
+        
+        return;
+
+    } else {
+        const itemOrigem = estoque[origem].find(item => item.tipo === tipo);
+        const itemDestino = estoque[destino].find(item => item.tipo === tipo);
+
+        if (!itemOrigem) {
+            return;
+        } else if (quantidade > itemOrigem.quantidade) {
+            if (itemDestino) {
+                itemDestino.quantidade += itemOrigem.quantidade;
+            } else {
+                estoque[destino].push({tipo: tipo, quantidade: itemOrigem.quantidade});
+            }
+            itemOrigem.quantidade = 0;
+        } else {
+            if (itemDestino) {
+                itemDestino.quantidade += quantidade;
+            } else {
+                estoque[destino].push({tipo, quantidade});
+            }
+            itemOrigem.quantidade -= quantidade;
+        }
     }
     
-    const pessoaOrigem = estoque[origem];
-    const pessoaDestino = estoque[destino];
-    let monteOrigem;
-    for(let i = 0; i < pessoaOrigem.length; i++){
-        const monte = pessoaOrigem[i];
-        if(monte.tipo === tipo){
-            monteOrigem = monte;
-            break;
-        }
-    }
-    if(!monteOrigem){
-        return;
-    }
+    return;
 }
 
-function limpaEstoque(){
-    return limpaEstoque;
-}
-
-function dePessoaParaPomar(origem, tipo, quantidade){
-    const pessoa = estoque[origem];
-    for(let i = 0; i < pessoa.length; i++){
-        const monte = pessoa[i];
-        if(monte.tipo === tipo){
-            monte.qtd -= Math.min(quantidade, monte.qtd);
-            return;
-        }
-    }
-}
-
-function dePomarParaPessoa(destino, tipo, quantidade){
-    const pessoa = estoque[destino];
-    for(let i = 0; i < pessoa.length; i++){
-        const monte = pessoa[i];
-        if(monte.tipo === tipo){
-            monte.qtd += Math.max(quantidade, 0);
-            return;
-        }
-    }
-    const novoMonte = {'tipo': tipo, 'qtd': Math.max(quantidade, 0)};
-    pessoa.push(novoMonte);
+function limpaEstoque() {
+    estoque = {};
 }
 
 export {getEstoque, transacaoNoEstoque, limpaEstoque};

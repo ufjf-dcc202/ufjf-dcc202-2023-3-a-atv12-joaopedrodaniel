@@ -7,7 +7,7 @@ document.entrada.addEventListener('submit', leFormulario);
 document.entrada.reset();
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('botaoLimpaLista').addEventListener('click', () => {
+    document.querySelector('#botaoLimpaLista').addEventListener('click', () => {
         limpaEstoque();
         atualizaTela();
     });
@@ -27,6 +27,20 @@ function leFormulario(event) {
     atualizaTela();
 }
 
+
+function atualizaTela(){
+    
+    const estoque = getEstoque();
+    
+    olJoao.innerHTML = "";
+    olMaria.innerHTML = "";
+    document.entrada.quantidade.value = 1;
+    document.entrada.fruta.value = "maca";
+    
+    preencheLista(olJoao, estoque.joao);
+    preencheLista(olMaria, estoque.maria);
+}
+
 function preencheLista(lista, estoqueDaPessoa){
     lista.textContent = "";
 
@@ -38,17 +52,4 @@ function preencheLista(lista, estoqueDaPessoa){
             lista.appendChild(li);
         }
     }
-}
-
-function atualizaTela(){
-
-    const estoque = getEstoque();
-
-    olJoao.innerHTML = "";
-    olMaria.innerHTML = "";
-    document.entrada.quantidade.value = 1;
-    document.entrada.fruta.value = "maca";
-
-    preencheLista(olJoao, estoque.joao);
-    preencheLista(olMaria, estoque.maria);
 }
