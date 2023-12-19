@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DCC202 - Atividade 12: João Pedro Nascimento da Rocha Daniel</title>
+    <script src="main.js" type="module"></script>
 </head>
 <body>
-    
+    <main>
+        <h1>DCC202 - Atividade 12: João Pedro Nascimento da Rocha Daniel</h1>
+        <p>Esta é a página principal que usa JavaScript para adicionar iteração.</p>
+        <section>
+            <form name="entrada">
+                <fieldset>
+                    <legend>Origem</legend>
+                    <label>pomar
+                        <input type="radio" name="origem" value="pomar" checked>
+                    </label>
+                    <label>joao
+                        <input type="radio" name="origem" value="joao">
+                    </label>
+                    <label>maria
+                        <input type="radio" name="origem" value="maria">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Destino</legend>
+                    <label>pomar
+                        <input type="radio" name="destino" value="pomar" checked>
+                    </label>
+                    <label>joao
+                        <input type="radio" name="destino" value="joao">
+                    </label>
+                    <label>maria
+                        <input type="radio" name="destino" value="maria">
+                    </label>
+                </fieldset>
+                <select name="fruta">
+                    <option value="maca">Maça</option>
+                    <option value="pera">Pera</option>
+                    <option value="banana">Banana</option>
+                </select>
+                <input type="number" name="quantidade" value="1" min="0" max="12" step="1">
+                <button type="submit" name="enviar">Enviar</button>
+            </form>
+        </section>
+        <section id="saida">
+            <h2>João</h2>
+            <ol id="joao"></ol>
+            <h2>Maria</h2>
+            <ol id="maria"></ol>
+        </section>
+    </main>
 </body>
 </html>
