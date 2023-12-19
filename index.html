@@ -14,33 +14,23 @@
             <form name="entrada">
                 <fieldset>
                     <legend>Origem</legend>
-                    <label>pomar
-                        <input type="radio" name="origem" value="pomar" checked>
-                    </label>
-                    <label>joao
-                        <input type="radio" name="origem" value="joao">
-                    </label>
-                    <label>maria
-                        <input type="radio" name="origem" value="maria">
-                    </label>
+                    <label><input type="radio" name="origem" value="pomar" checked>Pomar</label>
+                    <label><input type="radio" name="origem" value="joao">João</label>
+                    <label><input type="radio" name="origem" value="maria">Maria</label>
                 </fieldset>
                 <fieldset>
                     <legend>Destino</legend>
-                    <label>pomar
-                        <input type="radio" name="destino" value="pomar" checked>
-                    </label>
-                    <label>joao
-                        <input type="radio" name="destino" value="joao">
-                    </label>
-                    <label>maria
-                        <input type="radio" name="destino" value="maria">
-                    </label>
+                    <label><input type="radio" name="destino" value="pomar" checked>Pomar</label>
+                    <label><input type="radio" name="destino" value="joao">João</label>
+                    <label><input type="radio" name="destino" value="maria">Maria</label>
                 </fieldset>
+                <label>Fruta: </label>
                 <select name="fruta">
                     <option value="maca">Maçã</option>
                     <option value="pera">Pera</option>
                     <option value="banana">Banana</option>
                 </select>
+                <label>Quantidade:</label>
                 <input type="number" name="quantidade" value="1" min="0" max="12" step="1">
                 <button type="submit" name="enviar">Enviar</button>
             </form>
@@ -53,4 +43,5 @@
         </section>
     </main>
 </body>
+<button id="botaoLimpaLista" type="button">Limpar Lista</button>
 </html>
